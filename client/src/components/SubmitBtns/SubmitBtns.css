@@ -1,0 +1,30 @@
+.SubmitBtns {
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.SubmitBtns button {
+  width: 4rem;
+  height: 1.2rem;
+  color: #fff;
+  margin: 0.2rem;
+}
+
+.SubmitBtns .submit {
+  background: #0f06;
+  border: 0.1rem solid #0f0;
+}
+
+.SubmitBtns .cancel {
+  /* to correct the 0.8rem size from the javascript file */
+  padding: 0.1rem;
+  background: #f006;
+  border: 0.1rem solid #f00;
+}
+
+.SubmitBtns .submit:hover {
+  background-color: #0f09;
+}
+
+.SubmitBtns .cancel:hover {
+  background-color: #f009;
+}

@@ -1,0 +1,52 @@
+.flex {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.row {
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+/* close button style */
+.closeBtn {
+  border: none;
+  background: #0000;
+  position: absolute;
+  right: 0;
+  top: 0.1rem;
+}
+
+.closeBtn::before {
+  padding: 0.1rem 0.4rem;
+  content: "x";
+  color: #fff;
+  font-weight: bolder;
+  box-shadow: 0 0 2px #fff;
+  border-radius: 0 0.2rem 0 0.2rem;
+  transition: 0.4s;
+}
+
+.closeBtn:hover::before {
+  background: red;
+  box-shadow: 0 0 4px red;
+}
+
+/* end close button style */
+
+.btn {
+  cursor: pointer;
+}
+
+/* those two property should be added to the the same html 
+   tag to complete the animation
+   --------
+  opacity: 0;
+  transition: opacity 0.4s;
+*/
+div.show {
+  opacity: 1;
+  transition: 1s;
+}

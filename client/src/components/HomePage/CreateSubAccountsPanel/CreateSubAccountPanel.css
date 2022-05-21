@@ -1,0 +1,35 @@
+.CreateSubAccountPanel {
+  position: absolute;
+  margin: 10vw;
+  border-radius: 0.4rem;
+  background: var(--sub-clr);
+  border: 0.2rem solid #000;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.accounts {
+  width: 80vw;
+  height: 30vh;
+}
+
+.SubAccount .btn {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: none;
+  width: 4rem;
+  aspect-ratio: 3/1;
+  transition: all 0.4s;
+}
+
+.SubAccount .btn:hover {
+  border: 0.1rem solid #000;
+  box-shadow: 0 0 0.4rem #000;
+  width: 5rem;
+}
+
+div div #selected {
+  border: 0.1rem solid #000;
+  box-shadow: 0 0 0.4rem #000;
+  width: 5rem;
+}

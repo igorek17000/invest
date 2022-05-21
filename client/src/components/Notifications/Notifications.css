@@ -1,0 +1,51 @@
+.Notifications {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+  color: #fff;
+  width: var(--notification-width);
+  min-height: 3.4rem;
+  border-radius: 0.4rem;
+  margin: 0.4rem calc((100vw - var(--notification-width)) / 2);
+  animation: swipeDown 0.4s ease-in-out;
+  background-color: var(--sub-clr);
+}
+
+.Notifications .msg {
+  padding: 0.2rem;
+  margin-right: 1rem;
+}
+
+/* .notificationsCloseBtn::before {
+  padding: 0.1rem 0.4rem;
+  content: "x";
+  color: #fff;
+  position: absolute;
+  right: 0;
+  top: -0.05rem;
+  font-weight: bolder;
+  box-shadow: 0 0 2px #fff;
+  border-radius: 0 0.2rem 0 0.2rem;
+  transition: 0.4s;
+} */
+/* 
+.notificationsCloseBtn:hover::before {
+  background: red;
+  box-shadow: 0 0 4px red;
+} */
+
+.swipeUp {
+  margin-top: -6rem;
+  transition: 0.8s;
+}
+
+@keyframes swipeDown {
+  0% {
+    top: -6rem;
+  }
+  100% {
+    top: 0;
+  }
+}

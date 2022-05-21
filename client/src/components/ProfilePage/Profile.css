@@ -1,0 +1,45 @@
+/* @import "../../GlobalVars.css"; */
+
+.ProfilePage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.ProfilePage .profilePicture {
+  width: 14rem;
+  border-radius: 50%;
+  margin: 2rem;
+}
+
+.profileSubContainer {
+  width: 240px;
+}
+
+.profileSubContainer .inputWrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.ProfilePage label {
+  margin: 1rem 0;
+}
+
+.ProfilePage input {
+  margin: 1rem 0;
+}
+
+/* .hide {
+  display: none;
+} */
+
+@media screen and (min-width: 769px) {
+  .profileSubContainer {
+    width: 420px;
+  }
+  .profileSubContainer .inputWrapper {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
