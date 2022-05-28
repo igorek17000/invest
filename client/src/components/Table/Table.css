@@ -1,0 +1,17 @@
+.Table {
+  border-radius: 0.4rem;
+  border-collapse: collapse;
+  /* border: 0.1rem solid #000; */
+}
+
+tr > * {
+  padding: 1rem 2rem;
+}
+
+tr > *:not(:first-child) {
+  border-left: 0.1rem solid var(--main-clr-opacity);
+}
+
+tr:nth-child(even) {
+  background-color: var(--main-clr-opacity);
+}

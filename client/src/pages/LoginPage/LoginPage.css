@@ -1,0 +1,20 @@
+@import "../../GlobalVars.css";
+
+.LoginPage {
+  width: 100vw;
+  height: 75vh;
+  justify-content: space-evenly;
+}
+
+.LoginPage fieldset {
+  padding: 0.4rem;
+  border-radius: var(--border-radius);
+  border: 0.1rem solid var(--main-clr);
+}
+
+.LoginPage fieldset * {
+  padding: 0.2rem;
+  margin: 0.2rem;
+}
+
+/* @media screen and (min-width:769px) */

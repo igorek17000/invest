@@ -1,4 +1,3 @@
-import { qs, qsrc } from "../../functions/functions";
 import "./SubmitBtns.css";
 // import {ChangeName}
 import { BsCheckLg } from "react-icons/bs";

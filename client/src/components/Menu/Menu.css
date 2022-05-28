@@ -1,0 +1,97 @@
+@import "../../GlobalVars.css";
+
+.MenuWrapper {
+  position: absolute;
+  top: 0;
+  left: calc(-1 * var(--menu-margin));
+  width: 10em;
+  height: 100vh;
+  display: flex;
+  transition: var(--menu-transition);
+}
+
+.menu {
+  right: 0;
+  top: 0;
+  border-right: 0.2rem solid #fff;
+  width: var(--menu-margin);
+  background-color: var(--main-clr);
+  flex-direction: column;
+  transition: var(--menu-transition);
+}
+
+.MenuWrapper ul.menu {
+  position: relative;
+  overflow-x: hidden;
+}
+
+h5,
+h6 {
+  margin: 0.4rem;
+}
+
+.MenuWrapper .menu li {
+  position: relative;
+  list-style: none;
+  min-height: 2rem;
+  padding: 0.4rem;
+  margin: 2rem 25%;
+  cursor: pointer;
+  transition: 0.4s;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.MenuWrapper .menu li:hover {
+  color: #fff;
+  /* margin: 2rem 25%; */
+  border-bottom: 0.1rem solid #000;
+}
+
+.menu img {
+  width: var(--menu-margin);
+  padding: 2rem 1rem;
+  border-radius: 50%;
+}
+
+.menu-btn {
+  cursor: pointer;
+  color: black;
+  padding: 0.4em;
+  height: 1.4rem;
+  transition: var(--menu-transition);
+}
+
+.show-menu {
+  left: 0;
+  transition: var(--menu-transition);
+}
+
+.show-menu .menu-btn {
+  transform: translate(-2.2rem);
+  transition: var(--menu-transition);
+}
+
+/* Sub Child style MenuLi */
+li:hover .MenuLi .menuLiLetter {
+  animation: jump 0.4s ease-in-out;
+}
+
+li .MenuLi {
+  position: absolute;
+}
+
+@keyframes jump {
+  0% {
+    margin: 0;
+  }
+  50% {
+    margin: -0.6rem 0 0;
+  }
+  100% {
+    margin: 0;
+  }
+}
+/* End Sub Child style MenuLi */

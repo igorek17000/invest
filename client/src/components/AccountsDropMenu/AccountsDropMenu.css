@@ -1,0 +1,51 @@
+.AccountsDropMenu {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 1.4rem;
+  width: var(--Accounts-drop-menu-width);
+  overflow-y: hidden;
+  overflow-x: hidden;
+  border: 0.1rem solid var(--main-clr);
+  border-radius: 0.4rem;
+  transition: 0.4s;
+  align-self: flex-end;
+}
+
+.AccountsDropMenu .currentAccount {
+  border-bottom: 0.1rem solid var(--main-clr);
+  border-radius: 0.4rem;
+}
+
+/* the transition doesn't work because the height is set to fit-content, with numeric values it works perfectly */
+div.open {
+  overflow-y: auto;
+  height: 10rem;
+}
+
+.AccountsDropMenu .dropMenuWrapper {
+  position: absolute;
+}
+
+.AccountsDropMenu .dropMenuWrapper li {
+  overflow: hidden;
+  margin: 0.2rem;
+  width: calc(var(--Accounts-drop-menu-width) - 0.4rem);
+}
+
+.AccountsDropMenu button {
+  border: none;
+}
+
+.AccountsDropMenu button:hover {
+  box-shadow: 0 0 0.1rem #000;
+}
+
+.Account:hover .Account:focus {
+  scroll-snap-type: smooth;
+}
+
+.AccountsDropMenu::-webkit-scrollbar-track-piece {
+  margin: 1.6rem;
+  background: #0000;
+}

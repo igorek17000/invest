@@ -1,0 +1,17 @@
+.AccountBoard {
+  position: relative;
+  margin: 1rem 0.2rem;
+  width: calc(
+    100vw - var(--scrollbar-width) - 0.3rem
+  ); /*0.1rem for spacing and 0.2r for the margin*/
+  border-radius: 0.4rem;
+  border: 0.1rem solid var(--main-clr);
+}
+
+.AccountBoard > * {
+  margin: 1rem;
+}
+
+.AccountBoard .Table {
+  margin-top: 4rem;
+}

@@ -37,8 +37,8 @@
 } */
 
 .swipeUp {
-  margin-top: -6rem;
-  transition: 0.8s;
+  animation: swipeUp 0.6s ease-in-out;
+  top: -6rem;
 }
 
 @keyframes swipeDown {
@@ -47,5 +47,14 @@
   }
   100% {
     top: 0;
+  }
+}
+
+@keyframes swipeUp {
+  0% {
+    top: 0.4rem;
+  }
+  100% {
+    top: -6rem;
   }
 }

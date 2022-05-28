@@ -2,11 +2,9 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 // Functions
-import { setCookie, deleteCookies } from "../functions/helpers";
-import { print, switchMode } from "../functions/functions";
-
-// const username = localStorage.getItem("username");
-// const name = localStorage.getItem("name") || " ";
+import { setCookie, deleteCookies } from "../functions/cookies";
+import { print } from "../functions/functions";
+import { switchMode } from "../pages/SettingsPage/functions/switchMode";
 
 const initialState = {
   isLoggedIn: false,
@@ -14,22 +12,23 @@ const initialState = {
   token: "",
   name: "",
   mode: "light",
+  accounts: [],
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState: initialState,
   reducers: {
-    // register: (state) => {},
     login: (state, action) => {
-      const { username, token, name, mode } = action.payload;
+      const { username, token, name, mode, accounts } = action.payload;
       print("userReducer line 26: ", mode);
       switchMode(mode);
       setCookie(
         ["username", username],
         ["token", token],
-        ["name", name],
-        ["mode", mode || "light"]
+        ["name", name || ""],
+        ["mode", mode || "light"],
+        ["accounts", accounts.join(" ") || []]
       );
       return {
         isLoggedIn: true,
@@ -37,6 +36,7 @@ const userSlice = createSlice({
         token: token,
         name: name || "",
         mode: mode || "light",
+        accounts: accounts || [],
       };
     },
     logout: () => {
@@ -54,8 +54,15 @@ const userSlice = createSlice({
       switchMode(action.payload);
       return { ...state, mode: action.payload };
     },
+    updateAccounts: (state, action) => {
+      return {
+        ...state,
+        accounts: action.payload,
+      };
+    },
   },
 });
 
-export const { login, logout, updateName, updateMode } = userSlice.actions;
+export const { login, logout, updateName, updateMode, updateAccounts } =
+  userSlice.actions;
 export default userSlice.reducer;

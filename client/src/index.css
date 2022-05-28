@@ -14,6 +14,8 @@
   --bg-clr: #fff; /*4*/ /*#00FFC6*/
   --font-clr: #000;
 
+  --main-clr-opacity: #24788141; /*1*/
+
   /* Loading Page */
   --loading-msg-container-width: 18rem;
 
@@ -29,21 +31,30 @@
 
   /* mode transition */
   --mode-transition: color 1s, background-color 1s;
+
+  /* General */
+  --border-radius: 0.4rem;
+
+  /* Scrollbar */
+  --scrollbar-width: 0.4rem;
+
+  /* Account drop menu */
+  --Accounts-drop-menu-width: 8.8rem;
 }
 
 /* start of scrollbar style  */
 
-body::-webkit-scrollbar {
-  width: 0.4rem;
+*::-webkit-scrollbar {
+  width: var(--scrollbar-width);
   display: block;
 }
 
-body::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   background-color: var(--sub-clr);
   border-radius: 100px;
 }
 
-body::-webkit-scrollbar-track-piece {
+*::-webkit-scrollbar-track-piece {
   margin: calc(var(--nav-height) + 1rem) 0 0;
   background: #0000;
 }
