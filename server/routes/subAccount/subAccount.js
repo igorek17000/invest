@@ -1,26 +1,16 @@
 // Libraries and Packages
 import express from "express";
-// import dotenv from "dotenv/config";
-// import bcrypt from "bcrypt";
-// import Token from "jsonwebtoken";
-// import { validationResult } from "express-validator";
 
 // Data-Base Models/Collections
-import User from "../../models/userSchema.js";
-
-//  Middleware
-// import { loginValidate, signupValidate } from "../../middleware/validation.js";
-// import { authenticateUser } from "../../middleware/authenticateUser.js";
-// import mongoose from "mongoose";
+import User from "../../Schemas/userSchema.js";
+import Account from "../../Schemas/accountSchema.js";
 
 // Functions
 import { print } from "../../functions/functions.js";
-import Account from "../../models/accountSchema.js";
 
 // Express Routes
 const router = express.Router();
 const error = 401;
-// const url = ["http://localhost:4200", ""];
 
 //Routes
 
@@ -35,45 +25,38 @@ router.get("/", async (req, res) => {
 //   return res.send("sub account");
 // });
 
-router.post("/crypto", async (req, res) => {
-  console.log("subAccount.js line 26, crypto");
-  // const name = req.body.name;
-  // console.log("update.js line 27, req.body.name: ", name);
-  // if (!name) {
-  //   print("name is:", !name);
-  //   return res.status(error).send({
-  //     errors: ["couldn't update the name, please try again later"],
-  //   });
-  // }
+router.post("/:type", async (req, res) => {
+  const accountType = req.params.type;
+  const accountName = req.body.accountName;
+
+  console.log("subAccount.js line 26", accountType);
+
   const user = await User.findById(req.body.id);
   await user.accounts.push(
     new Account({
-      name: "crypto1",
+      name: accountName || "crypto1",
     })
   );
+
+  // print("subAccount.js line 41, user accounts", user.accounts);
+
   user
     .save()
     .then(() => {
-      print("new crypto wallet is created");
+      // print(`subAccount.js line 46, new ${accountType} account is created`);
       res.status(200).send({
-        msg: "new crypto wallet is created",
+        accounts: user.accounts.map((elem) => elem.name),
+        msg: `new ${accountType} account is created`,
       });
     })
     .catch((err) => {
       console.log(err);
       return res.status(error).send({
-        errors: ["couldn't create new crypto wallet, please try again later"],
+        errors: [
+          `couldn't create new ${accountType} account, please try again later`,
+        ],
       });
     });
 });
 
 export default router;
-
-// {
-//     $push: {
-//       accounts: {
-//         name: "crypto",
-//       },
-//     },
-//     $currentDate: { lastModified: true },
-//   }

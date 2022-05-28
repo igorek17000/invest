@@ -6,7 +6,7 @@ import Token from "jsonwebtoken";
 import { validationResult } from "express-validator";
 
 // Data-Base Models/Collections
-import User from "../../models/userSchema.js";
+import User from "../../Schemas/userSchema.js";
 
 //  Middleware
 import { loginValidate, signupValidate } from "../../middleware/validation.js";
@@ -22,7 +22,6 @@ import UserSubAccountRouter from "../subAccount/subAccount.js";
 // Express Routes
 const router = express.Router();
 const error = 401;
-const url = ["http://localhost:4200", ""];
 
 // router middleware
 router.use("/subAccount", authenticateUser, UserSubAccountRouter);
@@ -33,12 +32,14 @@ router.get("/", authenticateUser, async (req, res) => {
   const user = await User.findOne({ _id: req.body.id });
 
   if (user) {
-    return res.status(200).send({
-      verified: true,
-      username: user.username,
-      name: user.name,
-      mode: user.mode,
-    });
+    return setTimeout(() => {
+      res.status(200).send({
+        verified: true,
+        username: user.username,
+        name: user.name,
+        mode: user.mode,
+      });
+    }, 1000 * 0);
   }
 });
 
@@ -113,10 +114,11 @@ router.post("/login", loginValidate, async (req, res) => {
               "Access-Control-Expose-Headers": "Authorization",
               Authorization: "Bearer " + token,
             })
-            .json({
+            .send({
               username: user.username,
               name: user.name,
               mode: user.mode,
+              accounts: user.accounts.map((elem) => elem.name),
             }),
         2000
       );
@@ -205,6 +207,7 @@ router.post("/signup", loginValidate, signupValidate, async (req, res) => {
           })
           .send({
             username: newUser.username,
+            // accounts: newUser.accounts,
           })
       );
     } catch (err) {

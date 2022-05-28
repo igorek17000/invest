@@ -20,20 +20,21 @@ import { test } from "./middleware/test.js";
 import { print } from "./functions/functions.js";
 
 // const variable
-const local = "http://localhost:3000";
-const production = "https://mern-template-00.lm.r.appspot.com";
+const local = true;
+const url = local
+  ? "http://localhost:3000"
+  : "https://invest-final-project.herokuapp.com";
 const app = express();
 const port = process.env.PORT || 3000;
-const origin = process.env.NODE_ENV === "production" ? production : local;
 
 const corsConfig = {
-  origin: local,
+  origin: url,
   credentials: true,
   "Access-Control-Request-Method": ["get", "post", "put", "delete"],
 };
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // connect to mongodb
 // 0: disconnected
@@ -56,7 +57,7 @@ mongoose
       mongoose.connection.readyState
     )
   )
-  .catch((err) => console.error(err));
+  .catch((err) => console.error(err, "mongo error msg", err.message));
 // end connect to mongodb
 
 // express middleware
@@ -65,12 +66,22 @@ app.use(express.json());
 app.use("/", cors(corsConfig));
 app.use(cookieParser());
 // middleware to check the req data
-app.use("/", test);
-// app.use(express.static(__dirname + "/client/build"));
+// app.use("/", test);
+// not the best way but it's ok ||
+//                              \/
+!local ? app.use(express.static(__dirname + "/client/build")) : "";
+
+// Routes
 app.use("/api/user", UserRoute);
-// app.get("*", (req, res) => {
-// res.sendFile(path.join(__dirname + "/client/build/index.html"));
-// });
+// end of Routes
+
+// not the best way but it's ok ||
+//                              \/
+!local
+  ? app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname + "/client/build/index.html"));
+    })
+  : "";
 app.use("/", authenticateUser);
 
 // end express middleware

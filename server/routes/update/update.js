@@ -6,7 +6,7 @@ import Token from "jsonwebtoken";
 import { validationResult } from "express-validator";
 
 // Data-Base Models/Collections
-import User from "../../models/userSchema.js";
+import User from "../../Schemas/userSchema.js";
 
 //  Middleware
 import { loginValidate, signupValidate } from "../../middleware/validation.js";
