@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
-import { accountSchema } from "./accountSchema.js";
+import { InvestAccountSchema } from "./InvestAccountSchema.js";
+import InvestAccount from "./InvestAccountSchema.js";
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -18,8 +19,25 @@ const UserSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
-  accounts: [accountSchema],
+  // the last account id, that user used
+  currentAccount: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "InvestAccount",
+    default: null,
+  },
+
+  accounts: {
+    type: [InvestAccountSchema],
+    default: [
+      new InvestAccount({
+        name: "Crypto Wallet",
+        type: "Crypto",
+      }),
+    ],
+  },
 });
+
+// await User.find().populate('currentAccount');
 
 const User = mongoose.model("User", UserSchema);
 

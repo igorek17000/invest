@@ -17,14 +17,14 @@ import { print } from "../../functions/functions.js";
 
 // sub routes
 import UserUpdateRouter from "../update/update.js";
-import UserSubAccountRouter from "../subAccount/subAccount.js";
+import UserInvestAccountRouter from "../investAccount/investAccount.js";
 
 // Express Routes
 const router = express.Router();
 const error = 401;
 
 // router middleware
-router.use("/subAccount", authenticateUser, UserSubAccountRouter);
+router.use("/investAccount", authenticateUser, UserInvestAccountRouter);
 router.use("/update", authenticateUser, UserUpdateRouter);
 
 //Routes
@@ -32,15 +32,34 @@ router.get("/", authenticateUser, async (req, res) => {
   const user = await User.findOne({ _id: req.body.id });
 
   if (user) {
+    print("user.js line 37", user);
+    const accounts = user.accounts.map((elem) => ({
+      id: elem._id,
+      name: elem.name,
+    }));
+
+    const currentAccount = user.accounts.filter(
+      (elem) => elem._id == user.currentAccount
+    )[0];
+
+    // print([
+    //   "user.js  line 46, user current account type",
+    //   typeof user.currentAccount.toString(),
+    //   typeof user.accounts[0]._id.toString(),
+    // ]);
+
     return setTimeout(() => {
       res.status(200).send({
         verified: true,
         username: user.username,
         name: user.name,
         mode: user.mode,
+        accounts: accounts,
+        currentAccount: currentAccount,
       });
     }, 1000 * 0);
   }
+  return res.status(error).send({ errors: ["error, no uesr is found"] });
 });
 
 router.post("/login", loginValidate, async (req, res) => {
@@ -66,13 +85,15 @@ router.post("/login", loginValidate, async (req, res) => {
       .status(error)
       .json({ errors: errors.array().map((elem) => elem.msg) });
   }
+
   console.log("express validation is passed");
   const username = req.body.username;
   const password = req.body.password;
-  console.log(username, password, "looking for user");
+  console.log(username, "looking for user");
 
   const user = await User.findOne({ username: username });
-  print("user line 58, user: ", user);
+
+  print("user line 84, user: ", user);
 
   // check if the username does exist in the database
   if (!user) {
@@ -80,6 +101,7 @@ router.post("/login", loginValidate, async (req, res) => {
       errors: [`no user is found with this username ${username}`],
     });
   }
+
   console.log("user is found");
 
   bcrypt.compare(password, user.password, function (err, result) {
@@ -89,7 +111,9 @@ router.post("/login", loginValidate, async (req, res) => {
     );
     if (err) {
       console.log("error", err);
-      return res.status(error).send({ error: "error, please try again later" });
+      return res
+        .status(error)
+        .send({ errors: ["error, please try again later"] });
     }
     if (result !== true) {
       return res.status(error).send({
@@ -99,7 +123,13 @@ router.post("/login", loginValidate, async (req, res) => {
     // generate token and add it to headers response
     try {
       const token = getToken(user._id);
-      console.log("user.js line 60: generated token after signing in", token);
+
+      const currentAccount = user.accounts.filter(
+        (elem) => elem._id == user.currentAccount
+      )[0];
+
+      console.log("user.js line 112: generated token after signing in", token);
+
       return setTimeout(
         () =>
           res
@@ -113,20 +143,29 @@ router.post("/login", loginValidate, async (req, res) => {
             .set({
               "Access-Control-Expose-Headers": "Authorization",
               Authorization: "Bearer " + token,
-            })
+            }) // .cookie("token", token, {
+            //   httpOnly: false,
+            //   secure: true,
+            //   // sameSite: none,
+            //   maxAge: 900000,
+            // })
             .send({
               username: user.username,
               name: user.name,
               mode: user.mode,
-              accounts: user.accounts.map((elem) => elem.name),
+              accounts: user.accounts.map((elem) => {
+                return { id: elem._id, name: elem.name };
+              }),
+              currentAccount: currentAccount,
             }),
-        2000
+        2000 * 0
       );
       // return (
 
       // );
     } catch (err) {
       console.error(err);
+      res.status(error).send({ errors: ["error, please try again later"] });
     }
   });
 });
@@ -178,6 +217,7 @@ router.post("/signup", loginValidate, signupValidate, async (req, res) => {
       .status(error)
       .send({ errors: ["Error, please try again later"] });
   }
+
   console.log("user.js line 157", hashedPassword);
 
   // store the user with the hashed password in the database
@@ -207,12 +247,16 @@ router.post("/signup", loginValidate, signupValidate, async (req, res) => {
           })
           .send({
             username: newUser.username,
-            // accounts: newUser.accounts,
+            accounts: newUser.accounts.map((elem) => {
+              return { id: elem._id, name: elem.name };
+            }),
           })
       );
     } catch (err) {
       console.error(err);
-      return res.status(error).send({ errors: [err] });
+      return res
+        .status(error)
+        .send({ errors: ["error, please try again later"] });
     }
   });
 });

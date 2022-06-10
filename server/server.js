@@ -20,7 +20,7 @@ import { test } from "./middleware/test.js";
 import { print } from "./functions/functions.js";
 
 // const variable
-const local = true;
+const local = false;
 const url = local
   ? "http://localhost:3000"
   : "https://invest-final-project.herokuapp.com";
@@ -50,13 +50,7 @@ const mongoStatus = {
 
 mongoose
   .connect(process.env.DATABASE_URL)
-  .then(() =>
-    print(
-      "MongoDB is",
-      mongoStatus[mongoose.connection.readyState],
-      mongoose.connection.readyState
-    )
-  )
+  .then(() => print("MongoDB is", mongoStatus[mongoose.connection.readyState]))
   .catch((err) => console.error(err, "mongo error msg", err.message));
 // end connect to mongodb
 
