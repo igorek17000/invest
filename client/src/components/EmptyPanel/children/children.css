@@ -1,0 +1,55 @@
+.accounts {
+  width: 80vw;
+  margin: 2rem 0;
+}
+
+.accountNameWrapper {
+  /* opacity: 0; */
+  display: flex;
+  flex-direction: column;
+  margin: 2rem 0;
+  /* visibility: hidden; */
+}
+
+.accountNameWrapper * {
+  margin: 0.4rem 0;
+}
+
+.InvestAccount .btn {
+  padding: 0.4rem;
+  border-radius: 1rem;
+  border: none;
+  width: 4rem;
+  aspect-ratio: 3/1;
+  transition: all 0.4s;
+}
+
+.InvestAccount .btn:hover {
+  border: 0.1rem solid #000;
+  box-shadow: 0 0 0.4rem #000;
+  width: 5rem;
+}
+
+div div #selected {
+  border: 0.1rem solid #000;
+  box-shadow: 0 0 0.4rem #000;
+  width: 5rem;
+}
+
+@media screen and (min-width: 769px) {
+  .accountNameWrapper {
+    flex-direction: row;
+  }
+  .accountNameWrapper * {
+    margin: 0 1rem;
+  }
+}
+/* end new invest account style */
+
+/* delete invest account style */
+
+.DeleteInvestAccount,
+.DeleteInvestAccount > * {
+  margin: 2rem;
+}
+/* end delete invest account style */

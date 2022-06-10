@@ -1,22 +1,27 @@
 import "./Table.css";
 
 export const Table = (props) => {
-  const headers = props.headers.map((header) => <th>{header}</th>);
-  const rows = props.rows.map((row) => (
-    <tr>
-      {row.map((cell) => (
-        <td>{cell}</td>
-      ))}
-    </tr>
-  ));
-  //   const footer = props.footer.map((cell) => <td>{cell}</td>);
+  const headers = ["symbol", "name", "count", "price", "total"].map(
+    (header) => <th>{header}</th>
+  );
+  const rows = props.rows
+    ? props.rows.map((row) => (
+        <tr>
+          {row.map((cell) => (
+            <td>{cell}</td>
+          ))}
+        </tr>
+      ))
+    : "";
+  const footer = props.footer
+    ? props.footer.map((cell) => <td>{cell}</td>)
+    : "";
 
   return (
     <table className="Table">
       <tr>{headers}</tr>
       {rows}
-      {/*       <tfoot>{footer}</tfoot>
-       */}
+      <tr>{footer}</tr>
     </table>
   );
 };

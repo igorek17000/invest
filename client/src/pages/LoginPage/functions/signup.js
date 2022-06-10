@@ -36,8 +36,8 @@ export const signup = async (data) => {
         login({
           username: res.data.username,
           token: token,
-          name: res.data.name,
           mode: "light",
+          accounts: res.data.accounts,
         })
       );
       store.dispatch(

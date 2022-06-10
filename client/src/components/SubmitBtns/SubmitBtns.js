@@ -2,6 +2,7 @@ import "./SubmitBtns.css";
 // import {ChangeName}
 import { BsCheckLg } from "react-icons/bs";
 import { ImCross } from "react-icons/im";
+// import { defualtCancelSubmitBtn } from "../EmptyPanel/children/functions/functions";
 
 export const SubmitBtns = (props) => {
   return (

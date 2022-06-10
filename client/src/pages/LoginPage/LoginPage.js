@@ -19,6 +19,7 @@ export function LoginPage() {
           <label htmlFor="password">Password</label>
           <input type="password" name="password" className="password input" />
           <button
+            className="button"
             onClick={(e) => {
               e.preventDefault();
               loginUser({
@@ -46,6 +47,7 @@ export function LoginPage() {
           />
 
           <button
+            className="button"
             onClick={(e) => {
               e.preventDefault();
               signup({

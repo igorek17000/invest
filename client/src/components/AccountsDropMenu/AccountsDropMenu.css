@@ -1,15 +1,18 @@
+@import "../../GlobalVars.css";
+
 .AccountsDropMenu {
   position: absolute;
-  right: 0;
   top: 0;
+  left: 0;
+  color: #000;
   height: 1.4rem;
-  width: var(--Accounts-drop-menu-width);
+  transition: 0.4s;
   overflow-y: hidden;
   overflow-x: hidden;
-  border: 0.1rem solid var(--main-clr);
   border-radius: 0.4rem;
-  transition: 0.4s;
-  align-self: flex-end;
+  background-color: #fff;
+  border: 0.1rem solid var(--main-clr);
+  width: var(--Accounts-drop-menu-width);
 }
 
 .AccountsDropMenu .currentAccount {
@@ -24,21 +27,17 @@ div.open {
 }
 
 .AccountsDropMenu .dropMenuWrapper {
-  position: absolute;
+  background-color: #fff;
 }
 
 .AccountsDropMenu .dropMenuWrapper li {
   overflow: hidden;
-  margin: 0.2rem;
   width: calc(var(--Accounts-drop-menu-width) - 0.4rem);
 }
 
-.AccountsDropMenu button {
+.AccountsDropMenu .dropMenuWrapper li button.button {
   border: none;
-}
-
-.AccountsDropMenu button:hover {
-  box-shadow: 0 0 0.1rem #000;
+  margin: 0;
 }
 
 .Account:hover .Account:focus {

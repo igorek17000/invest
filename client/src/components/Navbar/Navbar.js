@@ -7,9 +7,6 @@ import "./Navbar.css";
 // imgs
 import logo from "../Menu/profilePicture.svg";
 
-// functions
-import { qs } from "../../functions/functions";
-
 // components
 import Menu from "../Menu/Menu.js";
 

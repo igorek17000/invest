@@ -40,10 +40,20 @@
   cursor: pointer;
 }
 
-/* input style */
-.input {
+/* input button style */
+input,
+.button {
   border: 0.1rem solid var(--main-clr);
   border-radius: var(--border-radius);
+}
+
+.button {
+  padding: 0.2rem;
+  cursor: pointer;
+}
+
+.button:hover {
+  box-shadow: 0 0 0.4rem var(--main-clr);
 }
 
 .input:focus {
@@ -59,8 +69,7 @@
   opacity: 0;
   transition: opacity 0.4s;
 */
-div.show,
-div.show * {
+div.show {
   visibility: visible;
   opacity: 1;
   transition: 1s;

@@ -5,7 +5,7 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: var(--main-clr);
+  background: var(--main-bg-clr);
   top: 0;
   z-index: 1;
   color: #fff;

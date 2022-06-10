@@ -8,7 +8,7 @@ export const handleSubmitName = () => {
   const name = qsiv(".ProfilePage .name");
   qsrc(".ProfilePage .SubmitBtns", "show");
   ChangeName({ name: name });
-  setCookie("name", name);
+  setCookie(["name", name]);
 };
 
 export const handleCancelSubmitName = () => {

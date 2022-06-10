@@ -25,7 +25,7 @@ import { LoadingPage } from "./pages/LoadingPage/LoadingPage";
 
 // Functions
 import { AppUseEffect } from "./functions/AppUseEffect";
-import { qs } from "./functions/functions";
+import { qsrc } from "./functions/functions";
 
 function App() {
   //
@@ -45,7 +45,7 @@ function App() {
         <Navbar />
         <div
           className="PageWrapper" // console.log(token);
-          onClick={() => qs(".MenuWrapper").classList.remove("show-menu")}
+          onClick={() => qsrc(".MenuWrapper", "show-menu")}
         >
           <Routes>
             <Route

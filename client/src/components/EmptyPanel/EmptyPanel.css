@@ -1,0 +1,12 @@
+.EmptyPanel {
+  position: absolute;
+  height: 14rem;
+  width: 80vw;
+  margin: 10vw;
+  border-radius: 0.4rem;
+  background: var(--main-bg-clr);
+  border: 0.2rem solid #000;
+  /* opacity: 0;
+  visibility: hidden; */
+  transition: 0.4s;
+}

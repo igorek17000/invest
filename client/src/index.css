@@ -9,10 +9,12 @@
 :root {
   /* Colors */
   --main-clr: #247881; /*1*/
+  --main-bg-clr: var(--main-clr); /*should be changed*/
   --sub-clr: #43919b; /*2*/
   --third-clr: #30aadd; /*3*/
-  --bg-clr: #fff; /*4*/ /*#00FFC6*/
-  --font-clr: #000;
+  --forth-clr: #00ffc6; /*4*/
+  --mode-bg-clr: #fff;
+  --mode-font-clr: #000;
 
   --main-clr-opacity: #24788141; /*1*/
 
@@ -68,8 +70,8 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: var(--font-clr);
-  background-color: var(--bg-clr);
+  color: var(--mode-font-clr);
+  background-color: var(--mode-bg-clr);
   transition: var(--mode-transition);
   /* hiding the scrollbar track won't work without this line */
   overflow: overlay;
@@ -82,7 +84,7 @@ code {
 
 a:link,
 a:visited {
-  color: var(--font-clr);
+  color: var(--mode-font-clr);
   text-decoration: none;
 }
 

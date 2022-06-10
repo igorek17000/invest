@@ -1,26 +1,34 @@
 import { store } from "../../redux/store";
-import { qsac, qstc } from "../../functions/functions";
+import { qstc } from "../../functions/functions";
 import "./AccountsDropMenu.css";
+import { handleSwitchAccount } from "./functions/handleSwitchAccount";
 
 export const AccountsDropMenu = () => {
   const accounts = store.getState().user.accounts;
+  const currentInvestAccountName = store.getState().currentInvestAccount.name;
+
   return (
     <div className="AccountsDropMenu">
       <div
         className="currentAccount"
         onClick={() => qstc(".AccountsDropMenu", "open")}
       >
-        current account \/
+        {currentInvestAccountName || "invest accounts"} \/
       </div>
       <ul className="dropMenuWrapper">
         {accounts.map((account) => (
-          <li>{account}</li>
+          <li>
+            <button
+              onClick={() => handleSwitchAccount(account.id)}
+              id={account.id}
+            >
+              {account.name}
+            </button>
+          </li>
         ))}
-        <li>
-          <button onClick={() => qsac(".CreateSubAccountPanel", "show")}>
-            New Sub Account +
-          </button>
-        </li>
+        {/* <li>
+          <NewInvestAccountBtn name="New Invest Account" />
+        </li> */}
       </ul>
     </div>
   );

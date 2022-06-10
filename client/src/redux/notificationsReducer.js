@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { print } from "../functions/functions";
 
 const initialState = {
   isNotification: false,
@@ -11,6 +12,7 @@ const notificationsSlice = createSlice({
   initialState: initialState,
   reducers: {
     notify: (state, action) => {
+      print("notifying");
       const { status, msg } = action.payload;
       return {
         isNotification: true,

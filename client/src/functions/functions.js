@@ -1,9 +1,3 @@
-// Global Constants
-import { axiosConfig, url } from "./axiosConfig";
-
-// Functions
-import { setCookie } from "./cookies";
-
 // query selector and query selector all
 export function qs(elem) {
   return document.querySelector(elem);

@@ -1,11 +1,14 @@
 .Table {
   border-radius: 0.4rem;
   border-collapse: collapse;
-  /* border: 0.1rem solid #000; */
 }
 
 tr > * {
   padding: 1rem 2rem;
+}
+
+tr:not(:first-child) {
+  border-top: 0.1rem solid var(--main-clr-opacity);
 }
 
 tr > *:not(:first-child) {
@@ -14,4 +17,18 @@ tr > *:not(:first-child) {
 
 tr:nth-child(even) {
   background-color: var(--main-clr-opacity);
+}
+
+@media screen and (max-width: 640px) {
+  tr > *:nth-child(2),
+  tr:not(:last-child) > *:nth-child(5),
+  tr:last-child > *:nth-child(4) {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 380px) {
+  tr > * {
+    padding: 1rem 1.4rem;
+  }
 }
