@@ -11,7 +11,7 @@ export const deleteCookies = () => {
   localStorage.setItem("mode", "light");
   switchMode("light");
 
-  const items = ["username", "token", "name", "accounts"];
+  const items = ["username", "token", "name", "accounts", "currentAccount"];
   for (let item in items) {
     localStorage.removeItem(items[item]);
   }

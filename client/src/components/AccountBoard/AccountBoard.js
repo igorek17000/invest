@@ -1,7 +1,7 @@
 // Components
 import { Table } from "../Table/Table";
 import { BtnsAccountBoard, NewInvestAccountBtn } from "./BtnsAccountBoard";
-import { CreateInvestAccountPanel } from "../CreateInvestAccountsPanel/CreateInvestAccountsPanel";
+// import { CreateInvestAccountPanel } from "../CreateInvestAccountsPanel/CreateInvestAccountsPanel";
 import { AccountsDropMenu } from "../AccountsDropMenu/AccountsDropMenu";
 
 // CSS
@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 
 // helpers functions
 import { print } from "../../functions/functions";
-import { NewInvestAccount } from "../EmptyPanel/children/NewInvestAccount";
 import { EmptyPanel } from "../EmptyPanel/EmptyPanel";
 
 export const AccountBoard = () => {
@@ -34,12 +33,9 @@ export const AccountBoard = () => {
       {/* <CreateInvestAccountPanel /> */}
       {isCurrentAccount ? (
         <Table
-          rows={[
-            ["FB", "Meta Platforms Inc - Class A", "10", "195.13", "19513"],
-            ["q", "w", "e", "r", "t"],
-            ["q", "w", "e", "r", "t"],
-          ]}
-          footer={["TOTAL", "", "", "", currentInvestAccount.cash]}
+          headers={["symbol", "name", "amount", "price", "total"]}
+          history={currentInvestAccount.history}
+          footer={["CASH", "", "", "", currentInvestAccount.cash]}
         />
       ) : (
         <NewInvestAccountBtn classs="button" name="New Invest Account" />

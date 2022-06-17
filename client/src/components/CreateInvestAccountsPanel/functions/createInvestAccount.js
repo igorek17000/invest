@@ -5,6 +5,7 @@ import { notify } from "../../../redux/notificationsReducer";
 import { store } from "../../../redux/store";
 import { updateAccounts } from "../../../redux/userReducer";
 import { setCurrentInvestAccount } from "../../../redux/currentInvestAccountReducer";
+import { closePanel } from "../../../redux/panelReducer";
 
 export const createInvestAccount = () => {
   const axiosConfig = axiosConfiguration();
@@ -19,6 +20,7 @@ export const createInvestAccount = () => {
       }
     )
     .then((res) => {
+      store.dispatch(closePanel());
       store.dispatch(updateAccounts(res.data.accounts));
       store.dispatch(setCurrentInvestAccount(res.data.currentAccount));
       store.dispatch(

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { store } from "../redux/store";
 
-const local = true;
+const local = false;
 const url = local
   ? "http://localhost:4200"
   : "https://invest-final-project.herokuapp.com";

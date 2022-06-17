@@ -46,4 +46,34 @@
   background-color: #12345620;
 }
 
+.BtnsAccountBoard .btn:hover:before {
+  content: attr(data-hover);
+  position: absolute;
+  min-width: 3rem;
+  padding: 0 0.6rem;
+  height: 1.2rem;
+  color: var(--mode-font-clr);
+  background-color: var(--main-clr-opacity);
+  transform: translate(-50%, -118%);
+}
+
 /* end Btns Account Board style */
+
+/* ALL */
+
+@media screen and (max-width: 423px) {
+  /* .AccountBoard .Table {
+    margin-top: 6rem;
+  } */
+  .BtnsAccountBoard {
+    width: calc(100vw - 2rem);
+    right: -0.6rem;
+    padding: 0 0.4rem;
+  }
+  .BtnsAccountBoard .btn {
+    padding: 0 0.2rem;
+  }
+  .BtnsAccountBoard .btn:first-child {
+    margin-left: 6rem;
+  }
+}

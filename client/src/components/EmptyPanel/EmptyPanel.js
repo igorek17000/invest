@@ -3,18 +3,18 @@ import "../../GlobalVars.css";
 import "./EmptyPanel.css";
 
 // Functions
-import { qsrc } from "../../functions/functions";
-import { store } from "../../redux/store";
 import { useSelector, useDispatch } from "react-redux";
 import { closePanel } from "../../redux/panelReducer";
+
+// Children
 import { NewInvestAccount } from "./children/NewInvestAccount";
 import { DeleteInvestAccount } from "./children/DeleteInvestAccount/DeleteInvestAccount";
+import { Buy } from "./children/BuySell/Buy";
+import { Sell } from "./children/BuySell/Sell";
 
 export const EmptyPanel = () => {
   const dispatch = useDispatch();
   const panelType = useSelector((state) => state.panel.type);
-
-  const Children = useSelector((state) => state.panel.children);
 
   let children;
 
@@ -25,13 +25,13 @@ export const EmptyPanel = () => {
     case "DeleteInvestAccount":
       children = <DeleteInvestAccount />;
       break;
-    case "exchange":
-      children = "coming soon";
-      break;
     case "buy":
-      children = "coming soon";
+      children = <Buy />;
       break;
     case "sell":
+      children = <Sell />;
+      break;
+    case "exchange":
       children = "coming soon";
       break;
     case "send":
@@ -51,7 +51,6 @@ export const EmptyPanel = () => {
         onClick={() => dispatch(closePanel())}
       ></button>
       {children}
-      {/* <Children /> */}
     </div>
   );
 };

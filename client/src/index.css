@@ -48,7 +48,6 @@
 
 *::-webkit-scrollbar {
   width: var(--scrollbar-width);
-  display: block;
 }
 
 *::-webkit-scrollbar-thumb {
@@ -91,5 +90,13 @@ a:visited {
 @media screen and (min-width: 769px) {
   * {
     font-size: 20px;
+  }
+}
+
+/* media query for the root variables */
+
+@media screen and (max-width: 423px) {
+  :root {
+    --Accounts-drop-menu-width: 6rem;
   }
 }

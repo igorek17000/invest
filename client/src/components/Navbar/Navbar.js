@@ -25,7 +25,7 @@ export function Navbar() {
   return (
     <nav>
       {elem}
-      <h1>Meow</h1>
+      <h1>Invest</h1>
       <Link to="/">
         <img src={logo} alt="logo" className="logo" />
       </Link>

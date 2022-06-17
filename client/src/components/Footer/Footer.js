@@ -12,7 +12,7 @@ export function Footer() {
         <li>About Us</li>
         <li>Contact</li>
         <li>Customer Support</li>
-        <li>&copy;2022 Meow - All rights reserved</li>
+        <li>&copy;2022 Invest - All rights reserved</li>
       </ul>
     </div>
   );

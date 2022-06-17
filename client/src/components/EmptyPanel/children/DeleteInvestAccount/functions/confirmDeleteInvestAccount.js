@@ -19,15 +19,23 @@ export const confirmDeleteInvestAccount = () => {
   axiosConfig
     .delete(`/api/user/investAccount/${id}`)
     .then((res) => {
+      store.dispatch(updateAccounts(res.data.accounts));
+    })
+    .then(() => {
+      store.dispatch(removeCurrentInvestAccount());
+    })
+    .then(() => {
       store.dispatch(
         notify({
           status: "success",
           msg: `${name} is deleted successfuly`,
         })
       );
-      store.dispatch(removeCurrentInvestAccount());
-      store.dispatch(updateAccounts(res.data.accounts));
+    })
+    .then(() => {
       store.dispatch(closePanel());
+    })
+    .then(() => {
       store.dispatch(stopLoading());
     })
     .catch((err) => {

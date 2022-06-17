@@ -18,6 +18,24 @@
 .AccountsDropMenu .currentAccount {
   border-bottom: 0.1rem solid var(--main-clr);
   border-radius: 0.4rem;
+  padding: 0;
+  width: var(--Accounts-drop-menu-width);
+  height: 1.3rem;
+  overflow: hidden;
+}
+
+.AccountsDropMenu:after {
+  content: "^";
+  color: #fff;
+  width: 1rem;
+  height: 1.2rem;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 0.15rem 0 0;
+  border-radius: 0.1rem 0 0 0;
+  transform: rotate(180deg);
+  background-color: var(--main-clr);
 }
 
 /* the transition doesn't work because the height is set to fit-content, with numeric values it works perfectly */
@@ -26,18 +44,26 @@ div.open {
   height: 10rem;
 }
 
-.AccountsDropMenu .dropMenuWrapper {
+.AccountsDropMenu .dropMenu {
   background-color: #fff;
 }
 
-.AccountsDropMenu .dropMenuWrapper li {
+.AccountsDropMenu .dropMenu li {
   overflow: hidden;
   width: calc(var(--Accounts-drop-menu-width) - 0.4rem);
 }
 
-.AccountsDropMenu .dropMenuWrapper li button.button {
+.AccountsDropMenu .dropMenu li button {
   border: none;
-  margin: 0;
+  width: 80%;
+  padding: 0.1rem;
+  margin: 0.1rem;
+  background-color: #0000;
+}
+
+.AccountsDropMenu .dropMenu li button:hover {
+  margin: 0.1rem 0.1rem 0;
+  border-bottom: 0.1rem solid var(--main-clr);
 }
 
 .Account:hover .Account:focus {
@@ -47,4 +73,17 @@ div.open {
 .AccountsDropMenu::-webkit-scrollbar-track-piece {
   margin: 1.6rem;
   background: #0000;
+}
+
+@media screen and (max-width: 769px) {
+  .AccountsDropMenu .currentAccount:after {
+    border-radius: 0.1rem 0 0 0.2rem;
+    transform: rotate(180deg) translate(70%, 0%);
+  }
+}
+
+@media screen and (max-width: 423px) {
+  .AccountsDropMenu {
+    top: 0.2rem;
+  }
 }

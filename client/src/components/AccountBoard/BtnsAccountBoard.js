@@ -1,7 +1,3 @@
-// Functions
-import { qsac } from "../../functions/functions";
-import { deleteInvestAccount } from "./functions/functions";
-
 // CSS
 import "./AccountBoard.css";
 
@@ -18,36 +14,51 @@ export const BtnsAccountBoard = () => {
 
   return (
     <div className="BtnsAccountBoard flex row">
-      <div className="btn flex" onClick={() => dispatch(getPanel("send"))}>
+      <div
+        data-hover="Send"
+        className="btn flex"
+        onClick={() => dispatch(getPanel("send"))}
+      >
         <BiArrowFromBottom />
       </div>
-      <div className="btn flex" onClick={() => dispatch(getPanel("receive"))}>
+      <div
+        data-hover="Receive"
+        className="btn flex"
+        onClick={() => dispatch(getPanel("receive"))}
+      >
         <BiArrowFromTop />
       </div>
       <div
+        data-hover="Exchange"
         className="btn flex"
-        style={{ color: "green" }}
+        onClick={() => dispatch(getPanel("exchange"))}
+      >
+        <FaExchangeAlt />
+      </div>
+      <div
+        data-hover="Sell"
+        style={{ color: "red" }}
+        className="btn flex"
         onClick={() => dispatch(getPanel("sell"))}
       >
         $
       </div>
       <div
-        style={{ color: "red" }}
+        data-hover="Buy"
         className="btn flex"
+        style={{ color: "green" }}
         onClick={() => dispatch(getPanel("buy"))}
       >
         $
       </div>
-      <div className="btn flex" onClick={() => dispatch(getPanel("exchange"))}>
-        <FaExchangeAlt />
-      </div>
       <div
+        data-hover="Delete"
         className="delete btn flex"
         onClick={() => dispatch(getPanel("DeleteInvestAccount"))}
       >
         <FaTrashAlt color="f00" />
       </div>
-      <div className="btn flex">
+      <div data-hover="New_Invest_Account" className="btn flex">
         <NewInvestAccountBtn />
       </div>
     </div>

@@ -1,21 +1,23 @@
-import { store } from "../../redux/store";
+import { useSelector } from "react-redux";
 import { qstc } from "../../functions/functions";
 import "./AccountsDropMenu.css";
 import { handleSwitchAccount } from "./functions/handleSwitchAccount";
 
 export const AccountsDropMenu = () => {
-  const accounts = store.getState().user.accounts;
-  const currentInvestAccountName = store.getState().currentInvestAccount.name;
+  const accounts = useSelector((state) => state.user.accounts);
+  const currentInvestAccountName = useSelector(
+    (state) => state.currentInvestAccount.name
+  );
 
   return (
-    <div className="AccountsDropMenu">
-      <div
-        className="currentAccount"
-        onClick={() => qstc(".AccountsDropMenu", "open")}
-      >
-        {currentInvestAccountName || "invest accounts"} \/
+    <div
+      className="AccountsDropMenu"
+      onClick={() => qstc(".AccountsDropMenu", "open")}
+    >
+      <div className="currentAccount">
+        {currentInvestAccountName || "invest accounts"}
       </div>
-      <ul className="dropMenuWrapper">
+      <ul className="dropMenu">
         {accounts.map((account) => (
           <li>
             <button
@@ -26,9 +28,6 @@ export const AccountsDropMenu = () => {
             </button>
           </li>
         ))}
-        {/* <li>
-          <NewInvestAccountBtn name="New Invest Account" />
-        </li> */}
       </ul>
     </div>
   );

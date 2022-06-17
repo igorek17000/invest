@@ -12,6 +12,7 @@ import { setCurrentInvestAccount } from "../redux/currentInvestAccountReducer";
 import { notify } from "../redux/notificationsReducer";
 
 export const AppUseEffect = async () => {
+  console.log(store.getState().user);
   store.dispatch(loading());
   const axiosConfig = axiosConfiguration();
   switchMode(localStorage.getItem("mode"));

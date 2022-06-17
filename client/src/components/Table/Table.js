@@ -1,11 +1,12 @@
 import "./Table.css";
+import { orgnizeData } from "./orgnizeData";
 
 export const Table = (props) => {
-  const headers = ["symbol", "name", "count", "price", "total"].map(
-    (header) => <th>{header}</th>
-  );
-  const rows = props.rows
-    ? props.rows.map((row) => (
+  const { rows } = orgnizeData(props.history, props.headers);
+
+  const tableHeaders = props.headers.map((header) => <th>{header}</th>);
+  const tableRows = rows
+    ? rows.map((row) => (
         <tr>
           {row.map((cell) => (
             <td>{cell}</td>
@@ -13,15 +14,19 @@ export const Table = (props) => {
         </tr>
       ))
     : "";
-  const footer = props.footer
+  const tableFooter = props.footer
     ? props.footer.map((cell) => <td>{cell}</td>)
     : "";
 
   return (
     <table className="Table">
-      <tr>{headers}</tr>
-      {rows}
-      <tr>{footer}</tr>
+      <thead>
+        <tr>{tableHeaders}</tr>
+      </thead>
+      <tbody>{tableRows}</tbody>
+      <tfoot>
+        <tr>{tableFooter}</tr>
+      </tfoot>
     </table>
   );
 };

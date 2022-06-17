@@ -17,6 +17,7 @@ import { qs } from "../../functions/functions";
 // Reducers
 import { logout } from "../../redux/userReducer";
 import { MenuLi } from "./MenuLi";
+import { removeCurrentInvestAccount } from "../../redux/currentInvestAccountReducer";
 
 export default function Menu() {
   const dispatch = useDispatch();
@@ -37,7 +38,12 @@ export default function Menu() {
           </Link>
         ))}
 
-        <li onClick={() => dispatch(logout())}>
+        <li
+          onClick={() => {
+            dispatch(removeCurrentInvestAccount());
+            dispatch(logout());
+          }}
+        >
           <MenuLi menuLi="Logout" />
         </li>
       </ul>

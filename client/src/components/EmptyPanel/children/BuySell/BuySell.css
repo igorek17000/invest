@@ -1,0 +1,18 @@
+@import "../../../../GlobalVars.css";
+
+.BuySellComp {
+  height: 8rem;
+  justify-content: space-evenly;
+}
+
+.BuySellComp div {
+  width: 18rem;
+  align-items: space-evenly;
+}
+
+.BuySellComp div input {
+  width: 10rem;
+}
+
+@media screen and (max-width: 769px) {
+}
