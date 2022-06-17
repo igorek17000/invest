@@ -14,10 +14,13 @@ import { authenticateUser } from "../../middleware/authenticateUser.js";
 
 // Functions
 import { print } from "../../functions/functions.js";
+import { reduceHistory } from "../functions/reduceHistory.js";
 
 // sub routes
 import UserUpdateRouter from "../update/update.js";
 import UserInvestAccountRouter from "../investAccount/investAccount.js";
+import SellRouter from "../sell/sell.js";
+import BuyRouter from "../buy/buy.js";
 
 // Express Routes
 const router = express.Router();
@@ -26,6 +29,11 @@ const error = 401;
 // router middleware
 router.use("/investAccount", authenticateUser, UserInvestAccountRouter);
 router.use("/update", authenticateUser, UserUpdateRouter);
+router.use("/sell", authenticateUser, SellRouter);
+router.use("/buy", authenticateUser, BuyRouter);
+// router.use("/send", authenticateUser, SendRouter);
+// router.use("/recieve", authenticateUser, RecieveRouter);
+// router.use("/exchange", authenticateUser, ExchangeRouter);
 
 //Routes
 router.get("/", authenticateUser, async (req, res) => {
@@ -33,14 +41,17 @@ router.get("/", authenticateUser, async (req, res) => {
 
   if (user) {
     print("user.js line 37", user);
-    const accounts = user.accounts.map((elem) => ({
-      id: elem._id,
-      name: elem.name,
-    }));
 
     const currentAccount = user.accounts.filter(
-      (elem) => elem._id == user.currentAccount
+      (elem) => elem._id.toString() === user.currentAccount
     )[0];
+
+    currentAccount
+      ? currentAccount.history
+        ? (currentAccount.history = reduceHistory(currentAccount.history))
+        : ""
+      : "";
+    console.log("user.js line 171, currentAccount", currentAccount);
 
     // print([
     //   "user.js  line 46, user current account type",
@@ -54,7 +65,10 @@ router.get("/", authenticateUser, async (req, res) => {
         username: user.username,
         name: user.name,
         mode: user.mode,
-        accounts: accounts,
+        accounts: user.accounts.map((elem) => ({
+          id: elem._id,
+          name: elem.name,
+        })),
         currentAccount: currentAccount,
       });
     }, 1000 * 0);
@@ -125,11 +139,18 @@ router.post("/login", loginValidate, async (req, res) => {
       const token = getToken(user._id);
 
       const currentAccount = user.accounts.filter(
-        (elem) => elem._id == user.currentAccount
+        (elem) => elem._id.toString() === user.currentAccount.toString()
       )[0];
-
+      currentAccount
+        ? currentAccount.history
+          ? (currentAccount.history = [
+              ...reduceHistory(currentAccount.history),
+            ])
+          : ""
+        : "";
       console.log("user.js line 112: generated token after signing in", token);
 
+      console.log("user.js line 152, currentAccount", currentAccount);
       return setTimeout(
         () =>
           res
@@ -153,10 +174,10 @@ router.post("/login", loginValidate, async (req, res) => {
               username: user.username,
               name: user.name,
               mode: user.mode,
+              currentAccount: currentAccount,
               accounts: user.accounts.map((elem) => {
                 return { id: elem._id, name: elem.name };
               }),
-              currentAccount: currentAccount,
             }),
         2000 * 0
       );

@@ -2,15 +2,14 @@ import mongoose from "mongoose";
 
 export const HistorySchema = new mongoose.Schema({
   status: {
-    // buy or sell
+    // buy or sell, (exchange, send, receive)
     type: String,
+    enum: ["buy", "sell"],
     required: true,
-    default: "string",
   },
   name: {
     type: String,
     required: true,
-    default: "string",
   },
   symbol: {
     type: String,
@@ -21,6 +20,14 @@ export const HistorySchema = new mongoose.Schema({
     required: true,
   },
   price: {
+    type: Number,
+    required: true,
+  },
+  total: {
+    type: Number,
+    required: true,
+  },
+  currentPrice: {
     type: Number,
     required: true,
   },

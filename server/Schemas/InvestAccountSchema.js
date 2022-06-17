@@ -8,6 +8,7 @@ export const InvestAccountSchema = new mongoose.Schema({
   },
   type: {
     type: String,
+    enum: ["Crypto", "Stocks"],
     required: true,
   },
   cash: {

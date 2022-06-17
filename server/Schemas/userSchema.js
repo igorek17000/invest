@@ -21,8 +21,7 @@ const UserSchema = new mongoose.Schema({
   },
   // the last account id, that user used
   currentAccount: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "InvestAccount",
+    type: String,
     default: null,
   },
 
@@ -33,11 +32,13 @@ const UserSchema = new mongoose.Schema({
         name: "Crypto Wallet",
         type: "Crypto",
       }),
+      new InvestAccount({
+        name: "Stocks",
+        type: "Stocks",
+      }),
     ],
   },
 });
-
-// await User.find().populate('currentAccount');
 
 const User = mongoose.model("User", UserSchema);
 

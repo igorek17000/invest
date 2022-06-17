@@ -7,13 +7,14 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "devStart": "nodemon server.js",
-    "deploy": "cd client && npm run build && cd .. && git add . && git commit -m 'initial commit' && git push heroku master"
+    "deploy": "cd client && npm run build && cd .. && git add . && git commit -m 'beta version of full functioning (buy & sell) actions, and added a reducer function( groupBy in SQL) to calculate the acconut total amount of one item(crypto, stock)' && git push heroku master"
   },
   "type": "module",
   "keywords": [],
   "author": "Alaa Abou Arraj",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -25,6 +26,5 @@
   },
   "engines": {
     "node": "16.x"
-  },
-  "devDependencies": {}
+  }
 }

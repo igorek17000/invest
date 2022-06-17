@@ -9,6 +9,7 @@ import InvestAccount from "../../Schemas/InvestAccountSchema.js";
 import { print } from "../../functions/functions.js";
 
 import { mongoose } from "mongoose";
+import { reduceHistory } from "../functions/reduceHistory.js";
 
 // Express Routes
 const router = express.Router();
@@ -29,6 +30,11 @@ router.get("/", async (req, res) => {
 // get invest account object by its id
 router.get("/:id", async (req, res) => {
   const user = await User.findById(req.body.id);
+  const id = req.params.id;
+
+  // if (!id) {
+  //
+  // }
 
   if (user) {
     print(
@@ -40,28 +46,34 @@ router.get("/:id", async (req, res) => {
     //   "user from invest account line 32, get invest account by id from params",
     //   user
     // );
+    print("investaccount.js line 43, id parameter", id);
+    const investAccount = user.accounts.filter((elem) => elem._id == id)[0];
 
-    const investAccount = user.accounts.filter(
-      (elem) => elem._id == req.params.id
-    )[0];
-
-    await user.updateOne({
-      $set: { currentAccount: investAccount._id },
-    });
-
-    print("user after update the current account", user);
-
-    user
-      .save()
-      .then(() => {
-        return res.send(investAccount);
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(error).send({
-          errors: ["error,  please try again later"],
-        });
+    try {
+      await user.updateOne({
+        $set: { currentAccount: investAccount._id },
       });
+      print("user after update the current account", user);
+      user
+        .save()
+        .then(() => {
+          investAccount.history = reduceHistory(investAccount.history);
+          return res.send(investAccount);
+        })
+        .catch((err) => {
+          console.log(err);
+          return res.status(error).send({
+            errors: ["error,  please try again later"],
+          });
+        });
+    } catch {
+      (err) => {
+        print("investAccount.js line 35,no id is found", id);
+        return res.status(error).send({
+          errors: ["error,  No account is selected"],
+        });
+      };
+    }
   }
   // return res.status(error).send("error");
 });
@@ -92,7 +104,13 @@ router.delete("/:id", async (req, res) => {
     .then((user) => {
       user
         .save()
-        .then(() => res.status(200).send({ accounts: user.accounts }))
+        .then(() =>
+          res.status(200).send({
+            accounts: user.accounts.map((elem) => {
+              return { id: elem._id, name: elem.name };
+            }),
+          })
+        )
         .catch(() => res.status(200).send("error"));
     })
     .catch((err) => {
